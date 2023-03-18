@@ -18,7 +18,7 @@ console.log(props.loading)
 
 <style scoped>
 .loading{
-  @apply  h-2 absolute top-0
+  @apply  h-1 absolute top-0
 }
 .bar{
   animation-duration: 2s;
