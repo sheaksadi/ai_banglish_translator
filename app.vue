@@ -18,6 +18,8 @@
             <option disabled value="">Please select one</option>
             <option value="BtoE">Bangla to Banglish</option>
             <option value="EtoB">Banglish to Bangla</option>
+            <option value="BEtoE">Banglish to English</option>
+            <option value="EtoBE">English to Banglish</option>
 
           </select>
 
@@ -102,9 +104,17 @@ const messages = reactive({
       "role": "system",
       "content": "I want you to write the following text in Bengali. Do not translate anything. Do not provide any explanations in your responses. My first sentence is: "
     }],
-  }
+    BEtoE: [{
+      "role": "system",
+      "content": "I want you to translate the following text in English.Do not provide any explanations in your responses. My first sentence is: "
+    }],
+    EtoBE: [{
+      "role": "system",
+      "content": "I want you to translate in Bengali and write the following text in Bengali but using English characters. Do not write anything in bangla characters . Do not provide any explanations in your responses. My first sentence is:  "
+    }],
 
-  ,
+
+  }
 })
 
 async function copyTranslation() {
@@ -120,30 +130,33 @@ function evalLanguage() {
   let eng = 0
   let bng = 0
 
-  for (let i = 0; i < 10; i++) {
-    if (message.value.length > i){
+    for (let i = 0; i < 10; i++) {
+      if (message.value.length > i){
 
-      if (alphabets.english.includes(message.value.charAt(i)) ){
-        eng++
-      }
-      if (alphabets.bengali.includes(message.value.charAt(i)) ){
-        bng++
-      }
+        if (alphabets.english.includes(message.value.charAt(i)) ){
+          eng++
+        }
+        if (alphabets.bengali.includes(message.value.charAt(i)) ){
+          bng++
+        }
 
+      }
     }
-  }
-  if (eng > bng){
-    selectedOption.value = "EtoB"
-  }
-  if (eng < bng){
-    selectedOption.value = "BtoE"
-  }
+    if (eng > bng){
+      selectedOption.value = "EtoB"
+    }
+    if (eng < bng){
+      selectedOption.value = "BtoE"
+    }
+
+
+
 
 
 }
 
 async function sendMessage(message) {
-  console.log(message.length)
+
   if (message.length > 2001){
     alert("Sorry can't convert more than 2000 characters try splitting your text");
 
@@ -158,6 +171,7 @@ async function sendMessage(message) {
     return
   }
   loading.value = true
+
   messages.value[selectedOption.value][0].content = messages.value[selectedOption.value][0].content + "' " + message + " '."
 
   const responseMsg = await $fetch('/api/response', {
@@ -174,8 +188,18 @@ async function sendMessage(message) {
     }],
     EtoB: [{
       "role": "system",
-      "content": "I want you to write the following text in Bengali. Do not provide any explanations in your responses. Do not provide any translations in your responses My first sentence is: "
+      "content": "I want you to write the following text in Bengali. Do not translate anything. Do not provide any explanations in your responses. My first sentence is: "
     }],
+    BEtoE: [{
+      "role": "system",
+      "content": "I want you to translate the following text in English.Do not provide any explanations in your responses. My first sentence is: "
+    }],
+    EtoBE: [{
+      "role": "system",
+      "content": "I want you to translate in Bengali and write the following text in Bengali but using English characters. Do not write anything in bangla characters . Do not provide any explanations in your responses. My first sentence is:  "
+    }],
+
+
   }
 
 }
