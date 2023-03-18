@@ -5,12 +5,14 @@
       <h1 class="text-blue-300 text-4xl md:text-6xl mb-28 title">BANGLISH CONVERTER</h1>
 
       <div class="flex items-center justify-center w-full flex-col">
+        <div class="text-blue-300 w-5/6 lg:w-3/4 xl:w-1/2 flex flex-col">
+          <p class="self-end ">{{message.value.length}}/2000</p>
+          <textarea spellcheck="false" class=" text-blue-300 w-full  input " v-model="message.value" @input="evalLanguage"
+                    placeholder="Convert banglish to bangla or convert bangla to banglish"
 
-      <textarea spellcheck="false" class="   input text-blue-300 w-5/6 lg:w-3/4 xl:w-1/2" v-model="message.value" @input="evalLanguage"
-                placeholder="Convert banglish to bangla or convert bangla to banglish"
-                @keydown.enter="sendMessage(message.value)"
-                maxlength="2000"
-      />
+          />
+        </div>
+
         <div class="w-5/6 lg:w-3/4 xl:w-1/2 flex justify-end items-center mt-2">
           <select v-model="selectedOption.value" class="input w-40 text-blue-400 ">
             <option disabled value="">Please select one</option>
@@ -141,8 +143,15 @@ function evalLanguage() {
 }
 
 async function sendMessage(message) {
+  console.log(message.length)
+  if (message.length > 2000){
+    alert("Sorry can't convert more than 2000 characters try splitting your text");
+
+    return
+  }
 
   if (message === ""){
+    alert('Type something');
     return
   }
   if (selectedOption.value === ""){
