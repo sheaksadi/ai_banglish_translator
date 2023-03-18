@@ -144,7 +144,7 @@ function evalLanguage() {
 
 async function sendMessage(message) {
   console.log(message.length)
-  if (message.length > 2000){
+  if (message.length > 2001){
     alert("Sorry can't convert more than 2000 characters try splitting your text");
 
     return
