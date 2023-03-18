@@ -1,42 +1,48 @@
 <template>
-  <div class="h-screen bg-gray-800 items-center justify-center  flex flex-col">
-    <div class="flex items-center justify-center w-full flex-col">
+  <div>
+    <loading-bar :loading="loading.value" class="absolute top-0 left-0"></loading-bar>
+    <div class="h-screen bg-gray-800 items-center  justify-center flex flex-col">
+      <h1 class="text-blue-300 text-5xl mb-28 capitalize">Banglish converter</h1>
+
+      <div class="flex items-center justify-center w-full flex-col">
 
       <textarea spellcheck="false" class="   input text-blue-300 w-5/6 lg:w-3/4 xl:w-1/2" v-model="message.value" @input="evalLanguage"
                 placeholder="Convert banglish to bangla or convert bangla to banglish"
                 @keydown.enter="sendMessage(message.value)"
                 maxlength="2000"
       />
-      <div class="w-5/6 lg:w-3/4 xl:w-1/2 flex justify-end items-center mt-2">
-        <select v-model="selectedOption.value" class="input w-40 text-blue-400 ">
-          <option disabled value="">Please select one</option>
-          <option value="BtoE">Bangla to Banglish</option>
-          <option value="EtoB">Banglish to Bangla</option>
+        <div class="w-5/6 lg:w-3/4 xl:w-1/2 flex justify-end items-center mt-2">
+          <select v-model="selectedOption.value" class="input w-40 text-blue-400 ">
+            <option disabled value="">Please select one</option>
+            <option value="BtoE">Bangla to Banglish</option>
+            <option value="EtoB">Banglish to Bangla</option>
 
-        </select>
+          </select>
 
-        <button
-            class=" w-36 input  capitalize text-2xl  ml-2 font-bold hover:ring-purple-600 hover:ring-2 text-blue-400"
-            @click="sendMessage(message.value)">
-          Convert
+          <button
+              class=" w-36 input  capitalize text-2xl  ml-2 font-bold hover:ring-purple-600 hover:ring-2 text-blue-400"
+              @click="sendMessage(message.value)">
+            Convert
+          </button>
+        </div>
+
+
+      </div>
+      <div class="container w-5/6 lg:w-3/4 xl:w-1/2   min-h-20 mt-4 relative">
+
+        <button v-if="translation.value"
+                class="absolute top-1 right-1 bg-transparent ring-1 ring-purple-600 text-blue-400 w-16 h-6 bg-amber-300 m-0  rounded"
+                @click="copyTranslation">Copy
         </button>
+
+
+        <h1 class="text-amber-50 mt-4 mx-2 my-2">{{ translation.value }}</h1>
       </div>
 
 
     </div>
-    <div class="container w-5/6 lg:w-3/4 xl:w-1/2   min-h-20 mt-4 relative">
-
-      <button v-if="translation.value"
-              class="absolute top-1 right-1 bg-transparent ring-1 ring-purple-600 text-blue-400 w-16 h-6 bg-amber-300 m-0  rounded"
-              @click="copyTranslation">Copy
-      </button>
-
-
-      <h1 class="text-amber-50 mt-4 mx-2 my-2">{{ translation.value }}</h1>
-    </div>
-
-
   </div>
+
 
 
   <!--    <div v-for="message in messages.value">-->
@@ -62,6 +68,8 @@
 
 <script setup>
 
+
+import LoadingBar from "./components/loading-bar";
 
 let loading = reactive({
   value: false,
@@ -90,7 +98,7 @@ const messages = reactive({
     }],
     EtoB: [{
       "role": "system",
-      "content": "I want you to act as a Bengali to Bengali translator using English characters. I will provide you with Bengali sentences using english letters, and you will translate them into Bengali words . Your responses should not be English translations, but rather Bengali words written with English characters. Do not provide any explanations in your responses. Do not provide any translations in your responses My first sentence is: "
+      "content": "I want you to write the following text in Bengali. Do not translate anything. Do not provide any explanations in your responses. My first sentence is: "
     }],
   }
 
