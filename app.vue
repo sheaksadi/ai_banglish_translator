@@ -2,7 +2,7 @@
   <div>
     <loading-bar :loading="loading.value" class="absolute top-0 left-0"></loading-bar>
     <div class="h-screen bg-gray-800 items-center  justify-center flex flex-col">
-      <h1 class="text-blue-300 text-5xl mb-28 title">BANGLISH CONVERTER</h1>
+      <h1 class="text-blue-300 text-4xl md:text-6xl mb-28 title">BANGLISH CONVERTER</h1>
 
       <div class="flex items-center justify-center w-full flex-col">
 
