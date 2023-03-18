@@ -19,7 +19,7 @@
             <option value="BtoE">Bangla to Banglish</option>
             <option value="EtoB">Banglish to Bangla</option>
             <option value="BEtoE">Banglish to English</option>
-            <option value="EtoBE">English to Banglish</option>
+<!--            <option value="EtoBE">English to Banglish</option>-->
 
           </select>
 
