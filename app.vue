@@ -7,7 +7,7 @@
       <div class="flex items-center justify-center w-full flex-col ">
         <div class="text-blue-300 w-5/6 lg:w-3/4 xl:w-1/2 flex flex-col">
           <p class="self-end ">{{message.value.length}}/2000</p>
-          <textarea spellcheck="false" class=" text-blue-300 w-full h-[15rem] bg-gray-700 rounded p-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent  input " v-model="message.value" @input="evalLanguage"
+          <textarea spellcheck="false" class=" text-blue-300 w-full h-[12rem] bg-gray-700 rounded p-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent  input " v-model="message.value" @input="evalLanguage"
                     placeholder="Convert banglish to bangla or convert bangla to banglish"
 
           />
@@ -40,7 +40,7 @@
         </button>
 
 
-        <h1 v-if="translation.value" class="text-amber-50 mt-4 mx-2 my-2  w-full h-[20rem] overflow-y-auto" style="scrollbar-width: thin">{{ translation.value }}</h1>
+        <h1 v-if="translation.value" class="text-amber-50 mt-4 mx-2 my-2  w-full h-[15rem] overflow-y-auto" style="scrollbar-width: thin">{{ translation.value }}</h1>
       </div>
 
 
