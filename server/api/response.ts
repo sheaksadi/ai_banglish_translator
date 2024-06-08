@@ -13,8 +13,8 @@ export default defineEventHandler(async (event) => {
     const messages: ChatCompletionRequestMessage[] = body.messages
 
     const result = await openai.createChatCompletion({
-        // model: 'gpt-4',
-        model: 'gpt-3.5-turbo',
+         model: 'gpt-4-turbo',
+        //model: 'gpt-3.5-turbo',
         messages:messages
     })
     console.log(result.data.choices[0])
